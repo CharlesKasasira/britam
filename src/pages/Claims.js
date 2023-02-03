@@ -37,6 +37,8 @@ export default function Claims({ parent_container }) {
   const [showNotification, handleShowNotification, handleCloseNotification] =
     useDialog();
 
+  const { authClaims, systemName } = useAuth();
+
   // initialising the logs collection.
   const logCollectionRef = collection(db, "logs");
 
@@ -60,13 +62,11 @@ export default function Claims({ parent_container }) {
   const [singleDoc, setSingleDoc] = useState(fields);
 
   useEffect(() => {
-    document.title = "Claims - SWICO";
+    document.title = `Claims ${systemName ? "- " + systemName : ""}`;
     getClaims();
 
     return () => getClaims();
   }, []);
-
-  const { authClaims } = useAuth();
 
   const getClaims = async () => {
     const listUsers = httpsCallable(functions, "listUsers");

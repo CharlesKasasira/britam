@@ -18,8 +18,9 @@ import Chat from "../components/messenger/Chat";
 import "../styles/ctas.css";
 
 function AddClaims({ parent_container }) {
+  const { authClaims, systemName } = useAuth();
   useEffect(() => {
-    document.title = "Add Claims - SWICO";
+    document.title = `Add Claims ${systemName ? "- " + systemName : ""}`;
     return () => {};
   }, []);
 
@@ -29,9 +30,7 @@ function AddClaims({ parent_container }) {
 
   const [attachedDocs, setAttachedDocs] = useState("");
 
-  console.log(attachedDocs);
-
-  const { authClaims } = useAuth();
+  // console.log(attachedDocs);
 
   const claimsCollectionRef = collection(db, "claims");
   const [fields, handleFieldChange] = useForm({

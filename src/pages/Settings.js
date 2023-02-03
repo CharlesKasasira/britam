@@ -27,11 +27,11 @@ function Settings() {
   const [show, handleShow, handleClose] = useDialog();
   const [meta, setMeta] = useState({});
   const { currentUser, setCurrentUser } = getAuth();
-  const { authClaims } = useAuth();
+  const { authClaims, systemName } = useAuth();
   const [shouldUpdate, setShouldUpdate] = useState(false);
 
   useEffect(() => {
-    document.title = "User Profile - SWICO";
+    document.title = `User Profile ${systemName ? "- " + systemName : ""}`;
     getUserMeta();
     console.log("hellow")
     return () => {};

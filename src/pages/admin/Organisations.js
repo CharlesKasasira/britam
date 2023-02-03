@@ -25,8 +25,10 @@ import "react-toastify/dist/ReactToastify.css";
 
 import Chat from "../../components/messenger/Chat";
 import "../../styles/ctas.css";
+import useAuth from "contexts/Auth";
 
 export default function Organisations({ parent_container }) {
+  const { systemName } = useAuth();
   const [organisations, setOrganisations] = useState([]);
   const organisationsCollectionRef = collection(db, "organisations");
   const logCollectionRef = collection(db, "logs");
@@ -38,7 +40,7 @@ export default function Organisations({ parent_container }) {
   const [clickedIndex, setClickedIndex] = useState(null);
   const [singleDoc, setSingleDoc] = useState({});
   useEffect(() => {
-    document.title = "Organisations - SWICO";
+    document.title = `Organisations ${systemName ? "- " + systemName : ""}`;
     getOrganisations();
   }, []);
 

@@ -23,14 +23,13 @@ export default function Clients({ parent_container }) {
   const [singleDoc, setSingleDoc] = useState();
   const [show, handleShow, handleClose] = useDialog();
   const [clients, setClients] = useState([]);
+  const { authClaims, systemName } = useAuth();
   useEffect(() => {
-    document.title = "Clients - SWICO";
+    document.title = `Clients ${systemName ? "- " + systemName : ""}`;
     getClients();
 
     return () => {};
   }, [clients]);
-
-  const { authClaims } = useAuth();
 
   // initialising the logs collection.
   const logCollectionRef = collection(db, "logs");

@@ -24,6 +24,7 @@ import { useMemo } from "react";
 function Supervisors({ parent_container }) {
   const [supervisors, setSupervisors] = useState([]);
   const [shouldUpdate, setShouldUpdate] = useState(false);
+  const { authClaims, systemName } = useAuth();
 
   useEffect(() => {
     // your code here
@@ -31,14 +32,14 @@ function Supervisors({ parent_container }) {
   }, []);
 
   useEffect(() => {
-    document.title = "Supervisors - Statewide Insurance";
+    document.title = `Supervisors ${systemName ? "- " + systemName : ""}`;
     getSupervisors();
     console.log("something");
     setShouldUpdate(false);
     return () => {};
   }, [shouldUpdate]);
 
-  const { authClaims } = useAuth();
+  
   // initialising the logs collection.
   const logCollectionRef = collection(db, "logs");
 

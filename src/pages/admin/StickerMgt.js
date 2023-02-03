@@ -29,10 +29,12 @@ import "react-toastify/dist/ReactToastify.css";
 import Chat from "../../components/messenger/Chat";
 
 import "../../styles/ctas.css";
+import useAuth from "contexts/Auth";
 
 export default function StickerMgt({ parent_container }) {
+  const { systemName } = useAuth();
   useEffect(() => {
-    document.title = "Stickers Management - SWICO";
+    document.title = `Stickers Management ${systemName ? "- " + systemName : ""}`;
     getStickerRange();
   }, []);
 
@@ -276,7 +278,9 @@ export default function StickerMgt({ parent_container }) {
                       [
                       {singleDoc.returned &&
                         singleDoc.returned.length > 0 &&
-                        singleDoc.returned.map((number, index) => <Fragment key={index}> {number}, </Fragment>)}
+                        singleDoc.returned.map((number, index) => (
+                          <Fragment key={index}> {number}, </Fragment>
+                        ))}
                       ]
                     </b>
                   </p>

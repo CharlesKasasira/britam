@@ -20,8 +20,9 @@ import { FaSortDown, FaSortUp } from "react-icons/fa";
 import "../styles/ctas.css";
 
 function Reports({ parent_container }) {
+  const { authClaims, systemName } = useAuth();
   useEffect(() => {
-    document.title = "Reports - SWICO";
+    document.title = `Reports ${systemName ? "- " + systemName : ""}`;
     getPolicies();
 
     return () => getPolicies();
@@ -30,8 +31,6 @@ function Reports({ parent_container }) {
   // policies
   const [policies, setPolicies] = useState([]);
   const policyCollectionRef = collection(db, "policies");
-
-  const { authClaims } = useAuth();
 
   const getPolicies = async () => {
     const data = await getDocs(policyCollectionRef);

@@ -27,6 +27,7 @@ import "../styles/ctas.css";
 function Agents() {
   const [agents, setAgents] = useState([]);
   const [shouldUpdate, setShouldUpdate] = useState(false);
+  const { authClaims, systemName } = useAuth();
 
   useEffect(() => {
     // your code here
@@ -34,13 +35,11 @@ function Agents() {
   }, []);
 
   useEffect(() => {
-    document.title = "Agents - SWICO";
+    document.title = `Agents ${systemName ? "- " + systemName : ""}`;
     getAgents();
     setShouldUpdate(false);
     return () => {};
   }, [shouldUpdate]);
-
-  const { authClaims } = useAuth();
 
   // initialising the logs collection.
   const logCollectionRef = collection(db, "logs");

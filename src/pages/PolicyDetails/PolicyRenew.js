@@ -8,10 +8,12 @@ import Header from "../../components/header/Header";
 import { currencyFormatter } from "../../helpers/currency.format";
 import { toast } from "react-toastify";
 import { Formik } from "formik";
+import useAuth from "contexts/Auth";
 
 function PolicyRenew() {
+  const { systemName } = useAuth();
   useEffect(() => {
-    document.title = "Sticker Details - SWICO";
+    document.title = `Sticker Details - ${systemName}`;
     getMTP();
 
     return () => {};

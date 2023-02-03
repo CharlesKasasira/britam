@@ -7,10 +7,12 @@ import Loader from "../../components/Loader";
 import { httpsCallable } from "firebase/functions";
 import { toast } from "react-toastify";
 import "../../styles/ctas.css";
+import useAuth from "contexts/Auth";
 
 function AddStickerRange({ parent_container }) {
+  const { systemName } = useAuth()
   useEffect(() => {
-    document.title = "Add Sticker Range - SWICO";
+    document.title = `Add Sticker Range ${systemName ? "- " + systemName : ""}`;
     getSupervisors();
   }, []);
 

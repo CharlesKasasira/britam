@@ -19,10 +19,10 @@ import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import { storage } from "../helpers/firebase";
 
 function AddUsers({ role }) {
-  const { authClaims } = useAuth();
+  const { authClaims, systemName } = useAuth();
   const addUser = httpsCallable(functions, "addUser");
   useEffect(() => {
-    document.title = "Add Users - SWICO";
+    document.title = `Add Users ${systemName ? "- " + systemName : ""}`;
     if (!authClaims.agent && role !== "Customer") {
       getOrganisations();
       getSupervisors();

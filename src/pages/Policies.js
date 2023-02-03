@@ -13,6 +13,7 @@ import { collection, addDoc } from "firebase/firestore";
 import { authentication, db } from "../helpers/firebase";
 
 import { toast } from "react-toastify";
+import useAuth from "contexts/Auth";
 
 // import { FaSolarPanel } from 'react-icons/fa'
 // import AddClient from '../parts/AddClient'
@@ -116,9 +117,10 @@ function Policies({ cat, btn_txt, pol, parent_container }) {
   ]);
 
   const { currencies, make, categories } = dynamicFields;
+  const { systemName } = useAuth();
 
   useEffect(() => {
-    document.title = "Policies - SWICO";
+    document.title = `Policies ${systemName ? "- " + systemName : ""}`;
 
     listUsers()
       .then(({ data }) => {

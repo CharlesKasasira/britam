@@ -20,7 +20,7 @@ import "../styles/ctas.css";
 import { useToggleMenu } from "hooks";
 
 function Dashboard({ largeContentClass }) {
-  const { authClaims } = useAuth();
+  const { authClaims, systemName } = useAuth();
   const [users, setUsers] = useState([]);
   const [policies, setPolicies] = useState([]);
 
@@ -28,7 +28,7 @@ function Dashboard({ largeContentClass }) {
   const [claimsSettled, setClaimsSettled] = useState([]);
 
   useEffect(() => {
-    document.title = "Dashboard - SWICO";
+    document.title = `Dashboard ${systemName ? "- " + systemName : ""}`;
 
     const listUsers = httpsCallable(functions, "listUsers");
 

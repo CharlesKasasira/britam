@@ -17,10 +17,12 @@ import Chat from "../../components/messenger/Chat";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import { storage } from "../../helpers/firebase";
 import "../../styles/ctas.css";
+import useAuth from "contexts/Auth";
 
 export default function AddPolicy({ parent_container }) {
+  const { systemName } = useAuth();
   useEffect(() => {
-    document.title = "Add Policy - SWICO";
+    document.title = `Add Policy ${systemName ? "- " + systemName : ""}`;
   }, []);
 
   const [isLoading, setIsLoading] = useState(false);

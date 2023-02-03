@@ -13,10 +13,12 @@ import Loader from "../components/Loader";
 import { RiCalendarTodoFill } from "react-icons/ri";
 import { convertStringToDate, timeConvert } from "../helpers/helpfulUtilities";
 import "../styles/ctas.css";
+import useAuth from "contexts/Auth";
 
 function Logs({ parent_container }) {
+  const { systemName } = useAuth();
   useEffect(() => {
-    document.title = "Logtrails - SWICO";
+    document.title = `Logtrails ${systemName ? "- " + systemName : ""}`;
     getLogs();
   }, []);
 

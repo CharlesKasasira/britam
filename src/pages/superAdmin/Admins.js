@@ -19,10 +19,12 @@ import "react-toastify/dist/ReactToastify.css";
 
 import Chat from "../../components/messenger/Chat";
 import "../../styles/ctas.css";
+import useAuth from "contexts/Auth";
 
 function Admins({ parent_container }) {
+  const { systemName } = useAuth();
   useEffect(() => {
-    document.title = "Admins - SWICO";
+    document.title = `Admins ${systemName ? "- " + systemName : ""}`;
     getAdmins();
   }, []);
 

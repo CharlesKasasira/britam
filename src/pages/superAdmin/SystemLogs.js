@@ -8,10 +8,12 @@ import Loader from "../../components/Loader";
 import { ImFilesEmpty } from "react-icons/im";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { IoIosCloseCircle } from "react-icons/io";
+import useAuth from "contexts/Auth";
 
 function SystemLogs() {
+  const { systemName } = useAuth();
   useEffect(() => {
-    document.title = "System Logs - SWICO";
+    document.title = `System Logs ${systemName ? "- " + systemName : ""}`;
     getLogs();
     return () => {};
   }, []);

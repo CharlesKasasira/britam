@@ -25,8 +25,9 @@ import Chat from "../../components/messenger/Chat";
 import "../../styles/ctas.css";
 
 function PolicyDetails({ parent_container }) {
+  const { authClaims, systemName } = useAuth();
   useEffect(() => {
-    document.title = "Sticker Details - SWICO";
+    document.title = `Sticker Details - ${systemName}`;
     getMTP();
     getStickerRange();
   }, []);
@@ -142,8 +143,6 @@ function PolicyDetails({ parent_container }) {
 
   //media query
   const isMobile = useMediaQuery("(max-width: 768px)");
-
-  const { authClaims } = useAuth();
 
   return (
     <div className={isMobile ? "components" : "components detailsMargin"}>

@@ -29,9 +29,12 @@ import "../styles/ctas.css";
 import moment from "moment";
 
 export default function Mtp({ parent_container, policyCategory }) {
+  const { authClaims, systemName } = useAuth();
   useEffect(() => {
     if (policyCategory === "mtp") {
-      document.title = "Motor Third Party - SWICO";
+      document.title = `Motor Third Party ${
+        systemName ? "- " + systemName : ""
+      }`;
     } else if (policyCategory === "comprehensive") {
       document.title = "Comprehensive - SWICO";
     } else if (policyCategory === "windscreen") {
@@ -49,7 +52,7 @@ export default function Mtp({ parent_container, policyCategory }) {
   }, []);
 
   // policies
-  const { authClaims } = useAuth();
+
   const [policies, setPolicies] = useState([]);
   const policyCollectionRef = collection(db, "policies");
 
