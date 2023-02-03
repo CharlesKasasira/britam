@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
 import useAuth from "../contexts/Auth";
-import { Navigate, Link, useNavigate, redirect } from "react-router-dom";
-import logo from "../assets/imgs/SWICO-LOGO.png";
+import { Navigate, Link } from "react-router-dom";
 import { MdVisibility, MdVisibilityOff } from "react-icons/md";
 import { authentication, onAuthStateChange } from "../helpers/firebase";
-import { signInWithEmailAndPassword, setPersistence } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { Alert } from "react-bootstrap";
 import "../assets/styles/login.css";
 import Loader from "../components/Loader";
@@ -13,13 +12,9 @@ function Login() {
   const [user, setUser] = useState({ email: "", password: "" });
   const [password, setPassword] = useState("password");
   const [isVisible, setIsVisible] = useState(false);
-
-  const navigate = useNavigate();
-
-  const { currentUser, setCurrentUser, authClaims, setAuthClaims } = useAuth();
+  const { currentUser, setCurrentUser, authClaims, setAuthClaims, logo } = useAuth();
   const [error, setError] = useState("");
-  const [isLoading, setLoading] = useState(false);
-
+  const [isLoading, setLoading] = useState(true);
   const pageOnRefreshSuperAdmin =
     localStorage.getItem("onRefresh") || "/superadmin/dashboard";
   const pageOnRefreshAdmin =
@@ -63,7 +58,7 @@ function Login() {
     }
   };
 
-  if (isLoading) return <Loader />;
+  console.log(isLoading)
 
   if (currentUser?.loggedIn) {
     if (authClaims.admin) {
@@ -81,8 +76,13 @@ function Login() {
   }
 
   return (
+    isLoading ? 
+    <Loader />
+    :
     <div className="auth-wrapper">
-      <img src={logo} width={150} alt="SWICO" />
+      {
+        logo && <img src={logo} width={150} alt="SWICO" />
+      }
       <form onSubmit={handleSignIn} className="tw-text-gray-500">
         <p className="mb-3">Enter Email and Password to sign in</p>
         {error && <Alert variant="danger">{error}</Alert>}

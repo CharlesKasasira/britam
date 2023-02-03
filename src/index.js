@@ -11,7 +11,6 @@ import "./index.css";
 
 const container = document.getElementById("root");
 const root = createRoot(container);
-
 root.render(
   <StrictMode>
     <AuthProvider>
@@ -19,14 +18,5 @@ root.render(
     </AuthProvider>
   </StrictMode>
 );
-
-// ReactDOM.render(
-//   <StrictMode>
-//     <AuthProvider>
-//       <App />
-//     </AuthProvider>
-//   </StrictMode>,
-//   document.getElementById("root")
-// );
 
 reportWebVitals();
